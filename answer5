@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Answer 5</title>
+  
+</head>
+<body>
+  <img src="img5.PNG" alt=""><br>
+  <br>
+  We will be learning the following things this week:
+  <table>
+    <thead>
+      <tr>
+        <th>Day 1</th>
+        <th>Day 2</th>
+        <th>Day 3</th>
+        <th>Day 4</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+       
+        <td>Linux 1</td>
+        <td>HTML</td>
+        <td>Linux 2</td>
+        <td>Linux 3</td>
+        
+      </tr>
+     
+      <tr>
+        
+        <td>GIT 1</td>
+        <td>CSS</td>
+        <td>Chemistry</td>
+        <td>Math</td>
+      </tr>
+      <!-- Add more rows as needed -->
+    </tbody>
+  </table>
+
+  <p>If you want to contact me, Please fill the form </p>
+  <form style="display: flex; flex-direction: column; justify-content: center;">
+    <label for="name">Name:<input type="text" id="name" name="name" required></label>
+    <label for="phone">Phone Number:<input type="tel" id="phone" name="phone" required></label>
+    <label for="email">Email:<input type="email" id="email" name="email" required></label>
+  </form>
+
+  <h2>The following things are important to be a programmer</h2>
+  <ul>
+    <li>A problem solving mindset</li>
+    <li>Consistency
+      <ul>
+        <li>Clean code</li>
+        <li>Through knowledge of core concepts</li>
+        <li>Readable code</li>
+      </ul>
+    </li>
+    <li>Speed</li>
+  </ul>
+</body>
+</html>
