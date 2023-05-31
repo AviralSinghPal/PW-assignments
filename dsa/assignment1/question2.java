@@ -1,3 +1,5 @@
+// 27. Remove Element
+
 class Solution {
     public int removeElement(int[] nums, int val) {
         int k = 0; // Number of elements not equal to val
