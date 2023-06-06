@@ -1,2 +1,24 @@
 <input type="text" id="searchInput" placeholder="Search...">
 <ul id="autocompleteResults"></ul>
+<script>
+  const searchInput = document.getElementById('searchInput');
+  const autocompleteResults = document.getElementById('autocompleteResults');
+
+  function fetchAutocompleteResults(query) {
+   // Simulating an asynchronous API call
+   setTimeout(() => {
+      const results = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry', 'Fig', 'Grape'];
+      const filteredResults = results.filter(result => result.toLowerCase().includes(query.toLowerCase()));
+      const html = filteredResults.map(result => `<li>${result}</li>`).join('');
+      autocompleteResults.innerHTML = html;
+    }, 300);
+  }
+
+  const debouncedFetchAutocompleteResults = debounce(fetchAutocompleteResults, 200);
+
+  searchInput.addEventListener('input', function(event) {
+    const query = event.target.value;
+    debouncedFetchAutocompleteResults(query);
+  });
+
+</script>
