@@ -246,3 +246,222 @@ function MyComponent({ isLoggedIn }) {
 ```
 
 The method you choose for conditional rendering depends on the complexity of the conditions and the structure of your components. Using the appropriate method can make your code more readable and maintainable.
+
+💡 **Q.8: Create a Simple Todo Web App with following features Using React**
+
+Here's a basic implementation of a Todo web app using React:
+
+```jsx
+import React, { useState } from 'react';
+import './App.css';
+
+function App() {
+  const [task, setTask] = useState('');
+  const [todos, setTodos] = useState([]);
+
+  const handleChange = (event) => {
+    setTask(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    if (task.trim() !== '') {
+      setTodos([...todos, task]);
+      setTask('');
+    }
+  };
+
+  return (
+    <div className="App">
+      <h1>Todo App</h1>
+      <div className="input-container">
+        <input
+          type="text"
+          placeholder="Enter your task"
+          value={task}
+          onChange={handleChange}
+        />
+        <button onClick={handleSubmit}>Add</button>
+      </div>
+      <ul>
+        {todos.map((todo, index) => (
+          <li key={index}>{todo}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+```
+
+To use this code, create a new React app and replace the contents of the `App.js` file with the code above. Also, create a `App.css` file in the same directory and add some basic styles to format the layout.
+
+💡 **Q.9: Expand the existing todo web app with two additional functionalities**
+
+To add the two additional functionalities, we need to modify the existing code and add buttons for updating the status and removing todos.
+
+Here's the updated code:
+
+```jsx
+import React, { useState } from 'react';
+import './App.css';
+
+function App() {
+  const [task, setTask] = useState('');
+  const [todos, setTodos] = useState([]);
+
+  const handleChange = (event) => {
+    setTask(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    if (task.trim() !== '') {
+      setTodos([...todos, { task, status: 'pending' }]);
+      setTask('');
+    }
+  };
+
+  const handleUpdateStatus = (index) => {
+    const updatedTodos = [...todos];
+    updatedTodos[index].status =
+      updatedTodos[index].status === 'pending' ? 'completed' : 'pending';
+    setTodos(updatedTodos);
+  };
+
+  const handleRemoveTodo = (index) => {
+    const updatedTodos = [...todos];
+    updatedTodos.splice(index, 1);
+    setTodos(updatedTodos);
+  };
+
+  return (
+    <div className="App">
+      <h1>Todo App</h1>
+      <div className="input-container">
+        <input
+          type="text"
+          placeholder="Enter your task"
+          value={task}
+          onChange={handleChange}
+        />
+        <button onClick={handleSubmit}>Add</button>
+      </div>
+      <ul>
+        {todos.map((todo, index) => (
+          <li key={index}>
+            {todo.task} - {todo.status}
+            <button onClick={() => handleUpdateStatus(index)}>Update Status</button>
+            <button onClick={() => handleRemoveTodo(index)}>Remove Todo</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+```
+
+In this updated code, we added the `status` property to each todo item, which is initialized as 'pending'. We then added two new functions, `handleUpdateStatus` and `handleRemoveTodo`, to update the status of the todos and remove them from the list, respectively. Two new buttons are added for each todo item, one for updating the status and the other for removing the todo.
+
+
+💡 **Q.10: Build Calculator Web app using React**
+
+To build a Calculator web app using React, we can create a component for the calculator and handle the button clicks to perform calculations. Here's the code for the Calculator component:
+
+```jsx
+import React, { useState } from 'react';
+import './Calculator.css';
+
+function Calculator() {
+  const [displayValue, setDisplayValue] = useState('0');
+  const [prevValue, setPrevValue] = useState(null);
+  const [operator, setOperator] = useState(null);
+  const [waitingForOperand, setWaitingForOperand] = useState(false);
+
+  const handleDigitClick = (digit) => {
+    if (waitingForOperand) {
+      setDisplayValue(digit);
+      setWaitingForOperand(false);
+    } else {
+      setDisplayValue((prevValue) => prevValue === '0' ? digit : prevValue + digit);
+    }
+  };
+
+  const handleOperatorClick = (op) => {
+    if (operator && !waitingForOperand) {
+      calculate();
+    }
+    setPrevValue(displayValue);
+    setOperator(op);
+    setWaitingForOperand(true);
+  };
+
+  const calculate = () => {
+    const currentValue = parseFloat(displayValue);
+    const previousValue = parseFloat(prevValue);
+    let result;
+
+    switch (operator) {
+      case '+':
+        result = previousValue + currentValue;
+        break;
+      case '-':
+        result = previousValue - currentValue;
+        break;
+      case '*':
+        result = previousValue * currentValue;
+        break;
+      case '/':
+        result = previousValue / currentValue;
+        break;
+      default:
+        return;
+    }
+
+    setDisplayValue(result.toString());
+    setPrevValue(null);
+    setOperator(null);
+  };
+
+  const handleEqualsClick = () => {
+    calculate();
+  };
+
+  const handleClearClick = () => {
+    setDisplayValue('0');
+    setPrevValue(null);
+    setOperator(null);
+    setWaitingForOperand(false);
+  };
+
+  return (
+    <div className="calculator">
+      <div className="display">{displayValue}</div>
+      <div className="buttons">
+        <button onClick={() => handleDigitClick('7')}>7</button>
+        <button onClick={() => handleDigitClick('8')}>8</button>
+        <button onClick={() => handleDigitClick('9')}>9</button>
+        <button onClick={() => handleOperatorClick('/')}>/</button>
+        <button onClick={() => handleDigitClick('4')}>4</button>
+        <button onClick={() => handleDigitClick('5')}>5</button>
+        <button onClick={() => handleDigitClick('6')}>6</button>
+        <button onClick={() => handleOperatorClick('*')}>*</button>
+        <button onClick={() => handleDigitClick('1')}>1</button>
+        <button onClick={() => handleDigitClick('2')}>2</button>
+        <button onClick={() => handleDigitClick('3')}>3</button>
+        <button onClick={() => handleOperatorClick('-')}>-</button>
+        <button onClick={() => handleDigitClick('0')}>0</button>
+        <button onClick={() => handleOperatorClick('.')}>.</button>
+        <button onClick={handleEqualsClick}>=</button>
+        <button onClick={() => handleOperatorClick('+')}>+</button>
+        <button onClick={handleClearClick}>C</button>
+      </div>
+    </div>
+  );
+}
+
+export default Calculator;
+```
+
+To use this code, create a new React app and replace the contents of the `App.js` file with the code above. Also, create a `Calculator.css` file in the same directory and add some basic styles to format the calculator layout. The CSS file is not provided in the code, so you can customize it according to your design preferences.
